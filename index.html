@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adobenauts Case Study</title>
+<meta name="description" content="Will Adobe lead or be left behind? A product strategy case study.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a broadcast "special report" opener, then a white editorial deck where every
+   section title follows the slides' red-claim : grey-insight pattern. Red always means Adobe. */
+:root{
+  --bg:#FFFFFF;
+  --panel:#F5F3F3;
+  --tint:#F8E1E2;
+  --tint-ink:#7A1F1B;
+  --line:#E7E2E2;
+  --ink:#1C1A1A;
+  --ink-2:#6A6565;
+  --ink-3:#9B9595;
+  --red:#D7322B;
+  --red-ink:#B8261F;
+  --c2:#2F62B8;
+  --c3:#C2861A;
+  --good:#2E7D4F;
+  --rival:#B9B3B3;
+  --tip-bg:#1C1A1A;
+  --tip-fg:#FFFFFF;
+  /* the opener stays on-air dark in both themes */
+  --air-bg:#120D1A;
+  --air-fg:#F6F1F1;
+  --air-dim:#C9BFC6;
+  --air-red:#E5453B;
+  --f-display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --wrap:1160px;
+  --gut:20px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141315;--panel:#1D1C1F;--tint:#3A1E20;--tint-ink:#F4C3BF;--line:#2E2C30;
+    --ink:#F3EFEE;--ink-2:#B6AFAF;--ink-3:#888282;--red:#EE5449;--red-ink:#F27A70;
+    --c2:#5C8DE0;--c3:#B8871F;--good:#5DBB82;--rival:#5A5559;--tip-bg:#F3EFEE;--tip-fg:#141315;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141315;--panel:#1D1C1F;--tint:#3A1E20;--tint-ink:#F4C3BF;--line:#2E2C30;
+  --ink:#F3EFEE;--ink-2:#B6AFAF;--ink-3:#888282;--red:#EE5449;--red-ink:#F27A70;
+  --c2:#5C8DE0;--c3:#B8871F;--good:#5DBB82;--rival:#5A5559;--tip-bg:#F3EFEE;--tip-fg:#141315;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:24px;height:56px}
+.mark{font-family:var(--f-display);font-weight:700;letter-spacing:.06em;font-size:19px;text-decoration:none;display:flex;align-items:center;gap:10px;flex:none}
+.mark i{width:10px;height:10px;background:var(--red);display:block;transform:rotate(45deg)}
+.toc{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
+.toc::-webkit-scrollbar{display:none}
+.toc a{font-size:13px;font-weight:600;text-decoration:none;color:var(--ink-2);padding:6px 10px;border-radius:4px;white-space:nowrap}
+.toc a:hover{color:var(--ink);background:var(--panel)}
+.toc a.on{color:var(--red-ink);background:var(--tint)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;background:var(--red);width:0}
+@media (max-width:640px){.mark span{display:none}.bar .wrap{gap:12px}}
+
+/* ---------- on-air opener ---------- */
+.onair{position:relative;background:var(--air-bg);color:var(--air-fg);overflow:hidden;isolation:isolate}
+.onair::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:
+   radial-gradient(60% 75% at 50% 48%,rgba(229,69,59,.42),transparent 70%),
+   radial-gradient(40% 50% at 82% 20%,rgba(120,40,90,.35),transparent 70%),
+   repeating-radial-gradient(circle at 50% 50%,transparent 0 46px,rgba(255,255,255,.035) 46px 47px)}
+.onair .wrap{padding-block:88px 40px;display:grid;justify-items:center;text-align:center;gap:22px}
+.tag{font-family:var(--f-display);font-weight:600;letter-spacing:.2em;font-size:15px;color:var(--air-red);background:rgba(255,220,220,.88);padding:8px 22px}
+.onair h1{font-family:var(--f-display);font-weight:700;text-transform:uppercase;font-size:clamp(44px,8.4vw,104px);line-height:.98;margin:0;letter-spacing:.01em;text-wrap:balance;max-width:14ch}
+.onair .sub{font-size:clamp(17px,2vw,20px);color:var(--air-dim);max-width:46ch;margin:0;text-wrap:balance}
+.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--air-dim)}
+.live b{width:8px;height:8px;border-radius:50%;background:var(--air-red);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);width:100%;max-width:900px;margin-top:18px;text-align:left}
+.meta div{background:var(--air-bg);padding:14px 16px;min-width:0}
+.meta dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--air-dim);margin-bottom:4px}
+.meta dd{margin:0;font-size:14px;font-weight:600;line-height:1.4}
+@media (max-width:720px){.meta{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ticker{border-top:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);overflow:hidden;font-family:var(--f-mono);font-size:13px;color:var(--air-fg)}
+.ticker-track{display:flex;width:max-content;animation:tick 48s linear infinite}
+.ticker ul{display:flex;list-style:none;margin:0;padding:12px 0}
+.ticker li{padding-inline:22px;white-space:nowrap;border-right:1px solid rgba(255,255,255,.14)}
+.ticker li em{font-style:normal;color:var(--air-red);font-weight:500}
+.ticker .dn::before{content:"▼ ";color:var(--air-red)}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{animation:none;width:auto}
+  .ticker ul{flex-wrap:wrap;justify-content:center;row-gap:4px}
+  .ticker ul[aria-hidden]{display:none}
+  .live b{animation:none}
+}
+
+/* ---------- sections ---------- */
+section{padding-block:96px}
+section + section{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:14px;margin-bottom:48px;max-width:900px}
+.kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin:0;display:flex;align-items:center;gap:10px}
+.kicker b{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:13px;background:var(--red);color:#fff;font-weight:500;letter-spacing:0}
+h2,h3,h4{text-wrap:balance;margin:0}
+h2{font-size:clamp(32px,4.6vw,52px);line-height:1.06;font-weight:800;letter-spacing:-.015em}
+h2 .r,h3 .r{color:var(--red)}
+h2 .g,h3 .g{color:var(--ink-2);display:block}
+.lede{font-size:19px;color:var(--ink-2);max-width:64ch;margin:0}
+.block{margin-top:72px}
+.block:first-of-type{margin-top:0}
+h3{font-size:clamp(22px,2.6vw,28px);line-height:1.15;font-weight:800;letter-spacing:-.01em}
+h3 .g{display:inline}
+.block > h3{margin-bottom:8px}
+.block > .note{color:var(--ink-2);max-width:66ch;margin:0 0 28px}
+p{margin:0}
+.cite{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
+.cols{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.cols > *{min-width:0}
+
+/* ---------- overview ---------- */
+.brief{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:3px solid var(--ink)}
+.brief > div{padding:22px 22px 6px 0;min-width:0}
+.brief > div + div{padding-left:22px;border-left:1px solid var(--line)}
+.brief dt{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);margin-bottom:10px}
+.brief dd{margin:0;font-size:16px;line-height:1.55}
+.brief dd strong{font-weight:700}
+@media (max-width:900px){.brief{grid-template-columns:repeat(2,minmax(0,1fr))}.brief > div:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:520px){.brief{grid-template-columns:1fr}.brief > div,.brief > div + div{padding-left:0;border-left:0;border-bottom:1px solid var(--line);padding-bottom:18px}}
+.process{list-style:none;padding:0;margin:56px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:step}
+.process li{background:var(--panel);padding:18px 18px 20px;border-radius:6px;min-width:0;position:relative;text-decoration:none}
+.process a{text-decoration:none;display:block}
+.process a:hover h4{color:var(--red)}
+.process .n{font-family:var(--f-display);font-size:34px;line-height:1;color:var(--red);font-weight:600}
+.process h4{font-size:18px;font-weight:800;margin:10px 0 6px}
+.process p{font-size:14px;color:var(--ink-2);line-height:1.5}
+@media (max-width:960px){.process{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.process{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.process{grid-template-columns:1fr}}
+
+/* ---------- timeline ---------- */
+.tl{overflow-x:auto;padding-bottom:8px;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut)}
+.tl ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(11,minmax(118px,1fr));min-width:1100px;position:relative}
+.tl .eras{display:grid;grid-template-columns:repeat(11,minmax(118px,1fr));min-width:1100px;margin-bottom:10px;gap:0}
+.tl .era{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border-top:2px solid var(--ink);padding-top:6px;margin-right:6px}
+.tl .era.e1{grid-column:1 / span 6}.tl .era.e2{grid-column:7 / span 2}.tl .era.e3{grid-column:9 / span 3;border-color:var(--red);color:var(--red-ink)}
+.tl li{padding:0 12px 0 0;position:relative}
+.tl li::before{content:"";display:block;height:1px;background:var(--line);margin:14px 0 14px}
+.tl li::after{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--red)}
+.tl li.big::after{background:var(--red)}
+.tl .y{font-family:var(--f-display);font-size:26px;font-weight:600;line-height:1;display:block}
+.tl .e{font-size:14px;color:var(--ink-2);line-height:1.4;display:block;margin-top:6px}
+
+/* ---------- charts ---------- */
+.fig{margin:0;min-width:0}
+.fig figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.fig figcaption strong{font-size:15px;font-weight:700}
+.fig figcaption span{font-size:13px;color:var(--ink-2)}
+.chart{position:relative;width:100%;min-height:40px}
+.chart svg{display:block;overflow:visible;max-width:100%}
+.chart text{font-family:var(--f-body);font-size:12px;fill:var(--ink-2)}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.chart .base{stroke:var(--ink-3);stroke-width:1}
+.chart .lbl{fill:var(--ink);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 12px;padding:0;list-style:none;font-size:13px;color:var(--ink-2)}
+.legend li{display:flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:2px;display:block}
+.legend i.dash{height:0;border-top:2px dashed currentColor;width:16px;border-radius:0}
+.keyed{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));font-size:14px;color:var(--ink-2)}
+.keyed li{display:flex;gap:10px;align-items:baseline}
+.keyed b{flex:none;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:11px;font-weight:700;font-family:var(--f-mono)}
+details.data{margin-top:12px;font-size:13px}
+details.data summary{cursor:pointer;color:var(--ink-2);font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;width:max-content}
+details.data summary:hover{color:var(--red-ink)}
+.tbl{overflow-x:auto;margin-top:10px}
+.tbl table{border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:100%}
+.tbl th,.tbl td{padding:6px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl th{font-weight:600;color:var(--ink-2)}
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--tip-bg);color:var(--tip-fg);font-size:13px;line-height:1.35;padding:7px 10px;border-radius:5px;max-width:240px;transform:translate(-50%,calc(-100% - 12px));font-variant-numeric:tabular-nums}
+#tip b{font-weight:700}
+
+/* html bars */
+.hb{display:grid;gap:10px}
+.hb-row{display:grid;grid-template-columns:minmax(84px,148px) minmax(0,1fr) 64px;gap:12px;align-items:center;font-size:14px}
+.hb-row .l{color:var(--ink);font-weight:600;overflow-wrap:anywhere;line-height:1.25}
+.hb-track{height:18px;position:relative}
+.hb-fill{height:100%;border-radius:0 4px 4px 0;min-width:3px}
+.hb-row .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.hb-row.ctx .l,.hb-row.ctx .v{color:var(--ink-2);font-weight:500}
+.stack{display:flex;gap:2px;height:28px}
+.stack > div{height:100%;min-width:3px}
+.stack > div:first-child{border-radius:4px 0 0 4px}
+.stack > div:last-child{border-radius:0 4px 4px 0}
+.stack-key{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;font-size:14px}
+.stack-key li{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:baseline}
+.stack-key i{width:10px;height:10px;border-radius:2px;display:block;transform:translateY(1px)}
+.stack-key span{color:var(--ink-2)}
+.stack-key b{font-variant-numeric:tabular-nums;font-weight:700}
+
+/* ---------- stat tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.tile{background:var(--bg);padding:20px 18px 18px;display:grid;gap:6px;align-content:start;min-width:0}
+.tile .big{font-family:var(--f-display);font-weight:600;font-size:clamp(34px,4vw,46px);line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
+.tile .big small{font-size:.5em;color:var(--ink-2);font-weight:500;margin-left:2px}
+.tile .k{font-size:14px;font-weight:700;line-height:1.3}
+.tile .d{font-size:13px;color:var(--ink-2);line-height:1.45}
+
+/* panels, cards, quotes */
+.panel{background:var(--panel);border-radius:6px;padding:24px}
+.cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.card{background:var(--tint);border-radius:6px;padding:22px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h4{font-size:18px;font-weight:800;line-height:1.25}
+.card p{font-size:15px;line-height:1.55}
+.card .stat{font-family:var(--f-display);font-size:30px;font-weight:600;line-height:1;color:var(--red-ink)}
+.card.neutral{background:var(--panel)}
+.verdict{border-left:3px solid var(--red);padding:4px 0 4px 22px;font-size:18px;line-height:1.55;max-width:70ch}
+.verdict strong{font-weight:800}
+.story{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.story li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:14px}
+.story li::before{content:"";width:12px;height:12px;border-radius:50%;margin-top:7px;background:var(--dot,var(--red))}
+.story h4{font-size:17px;font-weight:800;margin-bottom:4px;line-height:1.3}
+.story p{font-size:15px;color:var(--ink-2)}
+.press{display:grid;gap:12px}
+.press blockquote{margin:0;padding:16px 18px;background:var(--panel);border-radius:6px;border-left:3px solid var(--ink-3)}
+.press blockquote p{font-size:17px;font-weight:800;line-height:1.3}
+.press blockquote footer{margin-top:6px;font-size:13px;color:var(--ink-2);font-style:italic}
+
+/* stock */
+.selloffs{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.selloffs li{border-top:3px solid var(--red);padding-top:12px;display:grid;gap:4px;align-content:start;min-width:0}
+.selloffs .when{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.selloffs .drop{font-family:var(--f-display);font-size:30px;font-weight:600;line-height:1.05;color:var(--red)}
+.selloffs h4{font-size:16px;font-weight:800;line-height:1.3}
+.selloffs p{font-size:14px;color:var(--ink-2);line-height:1.5}
+@media (max-width:860px){.selloffs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.selloffs{grid-template-columns:1fr}}
+.bb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.bb-col{display:grid;gap:12px;align-content:start;min-width:0}
+.bb-h{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.bull .bb-h{color:var(--red-ink);border-color:var(--red)}
+.bear .bb-h{color:var(--ink-2);border-color:var(--ink-3)}
+@media (max-width:720px){.bb{grid-template-columns:1fr}}
+
+/* eras */
+.eras-fig{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.eras-fig figure{margin:0;display:grid;gap:10px;min-width:0}
+.eras-fig img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:4px;border:1px solid var(--line);max-width:100%}
+.eras-fig .when{font-family:var(--f-display);font-size:22px;font-weight:600;color:var(--red)}
+.eras-fig p{font-size:14px;color:var(--ink-2);line-height:1.45}
+@media (max-width:720px){.eras-fig{grid-template-columns:1fr}}
+
+/* tensions */
+.tension{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px) minmax(0,1fr);gap:20px;align-items:center}
+.tension .side{display:grid;gap:14px}
+.bubble{background:var(--panel);padding:16px 18px;border-radius:6px;position:relative}
+.bubble h4{color:var(--red);font-size:17px;font-weight:800;line-height:1.3}
+.bubble p{font-size:14px;color:var(--ink-2);margin-top:4px;line-height:1.45}
+.tension img{border-radius:6px;width:100%;mix-blend-mode:multiply}
+:root[data-theme="dark"] .tension img{mix-blend-mode:normal;opacity:.92}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tension img{mix-blend-mode:normal;opacity:.92}}
+@media (max-width:860px){.tension{grid-template-columns:1fr}.tension img{max-width:300px;margin-inline:auto}}
+
+/* pull quote */
+.pull{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
+.pull q{display:block;font-size:clamp(26px,3.4vw,40px);font-weight:800;line-height:1.12;letter-spacing:-.01em;quotes:"\201C" "\201D";text-wrap:balance}
+.pull q::before{content:open-quote;color:var(--red)}
+.pull q::after{content:close-quote;color:var(--red)}
+@media (max-width:820px){.pull{grid-template-columns:1fr}}
+
+.problem{background:var(--ink);color:var(--bg);border-radius:8px;padding:clamp(24px,4vw,44px);display:grid;gap:14px}
+.problem .kicker{color:var(--bg);opacity:.75}
+.problem p.big{font-size:clamp(22px,2.7vw,30px);font-weight:700;line-height:1.3;text-wrap:balance}
+.problem p.big em{font-style:normal;color:var(--red)}
+
+/* alternatives */
+.alts{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.alt{border:1px solid var(--line);border-radius:8px;padding:24px;display:grid;gap:14px;align-content:start;min-width:0}
+.alt .no{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink)}
+.alt h4{font-size:22px;font-weight:800;line-height:1.15}
+.alt .sl{font-size:15px;color:var(--ink-2);font-weight:600;margin-top:-6px}
+.alt dl{margin:0;display:grid;gap:10px;font-size:14.5px}
+.alt dt{font-weight:700;font-size:12px;font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.alt dd{margin:2px 0 0;line-height:1.5}
+.fate{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:6px 10px;border-radius:4px;background:var(--panel);width:max-content;max-width:100%}
+.fate.go{background:var(--tint);color:var(--tint-ink)}
+.fate i{width:8px;height:8px;border-radius:50%;background:currentColor;display:block;flex:none}
+@media (max-width:960px){.alts{grid-template-columns:1fr}}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative;margin-top:8px}
+.road::before{content:"";position:absolute;left:0;right:0;top:15px;height:3px;background:linear-gradient(90deg,var(--red),var(--tint))}
+.stage{padding-right:28px;display:grid;gap:10px;align-content:start;position:relative;min-width:0}
+.stage .dot{width:32px;height:32px;border-radius:50%;background:var(--bg);border:3px solid var(--red);display:grid;place-items:center;position:relative;z-index:1}
+.stage .dot::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--red)}
+.stage:nth-child(2) .dot::after{opacity:.6}.stage:nth-child(3) .dot::after{opacity:.3}
+.stage .when{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-top:8px}
+.stage h4{font-size:22px;font-weight:800;line-height:1.2}
+.stage .what{font-weight:600;font-size:15.5px}
+.stage .what b{color:var(--red-ink)}
+.stage ul{margin:4px 0 0;padding-left:18px;font-size:15px;color:var(--ink-2);display:grid;gap:4px}
+@media (max-width:820px){
+  .road{grid-template-columns:1fr;gap:32px;padding-left:46px}
+  .road::before{left:14px;right:auto;top:0;bottom:0;width:3px;height:auto;background:linear-gradient(180deg,var(--red),var(--tint))}
+  .stage{padding-right:0}
+  .stage .dot{position:absolute;left:-46px;top:0}
+  .stage .when{margin-top:4px}
+}
+
+.spot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:40px;align-items:start}
+.spot img{border-radius:8px;width:100%}
+@media (max-width:900px){.spot{grid-template-columns:1fr}.spot img{max-width:440px}}
+.opps{display:grid;gap:12px;margin-top:24px}
+.opp{background:var(--tint);border-radius:6px;padding:16px 18px;display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:center}
+.opp svg{width:40px;height:40px}
+.opp h4{font-size:17px;font-weight:800}
+.opp p{font-size:14.5px;color:var(--ink-2)}
+.csf{margin-top:28px;padding:18px 20px;background:var(--panel);border-radius:6px;font-size:15.5px;line-height:1.55;border-left:3px solid var(--red)}
+.csf strong{font-weight:800}
+
+/* forecast */
+.levers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lever{border-top:3px solid var(--red);padding-top:14px;display:grid;gap:6px;min-width:0}
+.lever .lv{font-family:var(--f-display);font-size:30px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.lever p{font-size:15px;color:var(--ink-2)}
+.lever .via{font-size:13px;font-family:var(--f-mono);color:var(--red-ink)}
+.outcome{margin-top:18px;background:var(--red);color:#fff;border-radius:6px;padding:22px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.outcome strong{font-family:var(--f-display);font-size:clamp(24px,3vw,34px);font-weight:600;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+.outcome span{font-size:15px;max-width:42ch;opacity:.92}
+@media (max-width:760px){.levers{grid-template-columns:1fr}}
+
+/* answer */
+.answer{background:var(--air-bg);color:var(--air-fg);position:relative;overflow:hidden;isolation:isolate}
+.answer::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(50% 80% at 85% 50%,rgba(229,69,59,.38),transparent 70%)}
+.answer .wrap{display:grid;gap:18px}
+.answer .kicker{color:var(--air-dim)}
+.answer h2{font-family:var(--f-display);font-weight:700;text-transform:uppercase;font-size:clamp(40px,7vw,88px);line-height:.98;letter-spacing:.01em}
+.answer h2 span{color:var(--air-red)}
+.answer p{color:var(--air-dim);font-size:18px;max-width:60ch}
+.answer .three{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.answer .three span{font-family:var(--f-display);font-size:20px;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(255,255,255,.3);padding:8px 16px}
+
+/* team & sources */
+.refs{columns:2 340px;column-gap:40px;font-size:13.5px;color:var(--ink-2);padding-left:18px;margin:0}
+.refs li{break-inside:avoid;margin-bottom:10px;overflow-wrap:anywhere;line-height:1.5}
+.refs i{color:var(--ink)}
+footer.foot{border-top:1px solid var(--line);padding-block:28px 40px;font-size:13px;color:var(--ink-3)}
+footer.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+</head>
+<body>
+
+<div id="tip" hidden></div>
+
+<nav class="bar" aria-label="Case study sections">
+  <div class="wrap">
+    <a class="mark" href="#top"><i></i>ADOBENAUTS</a>
+    <div class="toc">
+      <a href="#overview">Overview</a>
+      <a href="#diagnose">Diagnose</a>
+      <a href="#stock">Stock</a>
+      <a href="#define">Define</a>
+      <a href="#decide">Decide</a>
+      <a href="#deliver">Deliver</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </div>
+  <div class="progress" id="progress"></div>
+</nav>
+
+<header class="onair" id="top">
+  <div class="wrap">
+    <span class="tag">SPECIAL REPORT</span>
+    <h1>Will Adobe lead or be left behind?</h1>
+    <p class="sub">A product strategy case study on how the world’s creative standard can win back the next generation of creators.</p>
+    <span class="live"><b></b>Global updates live · Fall 2025</span>
+    <dl class="meta">
+      <div><dt>Subject</dt><dd>Adobe Inc. (NASDAQ: ADBE)</dd></div>
+      <div><dt>Timeline</dt><dd>Fall 2025</dd></div>
+      <div><dt>Scope</dt><dd>Financials → stock → market → strategy</dd></div>
+      <div><dt>Deliverables</dt><dd>Two decks, three alternatives, a 3-tier roadmap</dd></div>
+    </dl>
+  </div>
+  <div class="ticker" aria-label="Key figures">
+    <div class="ticker-track">
+      <ul>
+        <li>ADBE Dec ’24 <em class="dn">14.0%</em></li>
+        <li>ADBE Mar ’25 <em class="dn">11.0%</em></li>
+        <li>Canva share of Gen Z creative tool use <em>81.2%</em></li>
+        <li>Adobe Creative Cloud <em>14%</em></li>
+        <li>FY24 revenue <em>$21.5B</em></li>
+        <li>Operating margin <em>36.29%</em></li>
+        <li>New AI regulation laws worldwide <em>259</em></li>
+        <li>Creation market 2030 <em>$69.8B</em></li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>ADBE Dec ’24 <em class="dn">14.0%</em></li>
+        <li>ADBE Mar ’25 <em class="dn">11.0%</em></li>
+        <li>Canva share of Gen Z creative tool use <em>81.2%</em></li>
+        <li>Adobe Creative Cloud <em>14%</em></li>
+        <li>FY24 revenue <em>$21.5B</em></li>
+        <li>Operating margin <em>36.29%</em></li>
+        <li>New AI regulation laws worldwide <em>259</em></li>
+        <li>Creation market 2030 <em>$69.8B</em></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= OVERVIEW ================= -->
+<section id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">The brief</p>
+      <h2><span class="r">Strong company:</span><span class="g">Shrinking front door</span></h2>
+      <p class="lede">Adobe makes more money than ever. Fewer new creators start there. We studied the company in three passes: its financial health, its stock, and its market. All of it served one question: what should Adobe do in the next 12 months so it still leads in five years?</p>
+    </div>
+
+    <dl class="brief">
+      <div><dt>Context</dt><dd>Generative AI collapsed the cost of making things. Canva, Figma and a wave of AI-native tools now compete for the same creators Adobe trained for 40 years.</dd></div>
+      <div><dt>Problem</dt><dd><strong>Strength without reach.</strong> Adobe dominates enterprise, but only 14% of student and Gen Z creative tool use happens in Creative Cloud.</dd></div>
+      <div><dt>Approach</dt><dd>Read the financials, test them against the stock’s fall, map the market forces, list Adobe’s internal tensions, then weigh three strategic alternatives against them.</dd></div>
+      <div><dt>Recommendation</dt><dd>Stand up an <strong>Agile Studio</strong> now, ship a <strong>simplified mobile freemium tier</strong> within 12 months, and grow into the most trusted creative AI platform in 3–5 years.</dd></div>
+    </dl>
+
+    <ol class="process">
+      <li><a href="#diagnose"><span class="n">1</span><h4>Diagnose</h4><p>Is the business healthy? Revenue, margins, balance sheet, cost structure.</p></a></li>
+      <li><a href="#stock"><span class="n">2</span><h4>Value</h4><p>What does the market think? Share price, sell-offs, analyst targets, valuation.</p></a></li>
+      <li><a href="#define"><span class="n">3</span><h4>Define</h4><p>What changed outside? AI race, regulation, new rivals, Gen Z.</p></a></li>
+      <li><a href="#decide"><span class="n">4</span><h4>Decide</h4><p>Three strategic alternatives and where each one landed.</p></a></li>
+      <li><a href="#deliver"><span class="n">5</span><h4>Deliver</h4><p>A three-tier roadmap, the single most important action, and the forecast.</p></a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= DIAGNOSE ================= -->
+<section id="diagnose">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>1</b>Diagnose · Company financial analysis</p>
+      <h2><span class="r">Inside the numbers:</span><span class="g">A financial fortress</span></h2>
+      <p class="lede">Before asking whether Adobe is losing, we checked whether it can afford to fight. The answer is yes, comfortably.</p>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Origins:</span> <span class="g">Four decades of reinvention</span></h3>
+      <p class="note">Adobe has already survived two platform shifts: desktop publishing and the move from boxed software to the cloud. Each time it bought or built its way into the new era.</p>
+      <div class="tl" tabindex="0" aria-label="Adobe timeline, scrollable">
+        <div class="eras"><span class="era e1">John Warnock · founder era</span><span class="era e2">Bruce Chizen</span><span class="era e3">Shantanu Narayen</span></div>
+        <ol>
+          <li class="big"><span class="y">1982</span><span class="e">Founding</span></li>
+          <li><span class="y">1985</span><span class="e">Partnership with Apple</span></li>
+          <li><span class="y">1986</span><span class="e">IPO</span></li>
+          <li><span class="y">1987</span><span class="e">Illustrator launch</span></li>
+          <li class="big"><span class="y">1990</span><span class="e">Photoshop</span></li>
+          <li><span class="y">1993</span><span class="e">Acrobat &amp; PDF</span></li>
+          <li><span class="y">1999</span><span class="e">$1B in annual revenue</span></li>
+          <li><span class="y">2005</span><span class="e">Acquires Macromedia</span></li>
+          <li><span class="y">2009</span><span class="e">Acquires Omniture</span></li>
+          <li class="big"><span class="y">2012</span><span class="e">Creative Cloud shift</span></li>
+          <li><span class="y">2022</span><span class="e">Figma acquisition announced</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Revenue:</span> <span class="g">Every setback became a step up</span></h3>
+      <p class="note">Revenue grew from $3.6B in FY2008 to $21.5B in FY2024. The subscription shift dented growth for three years, then compounded it.</p>
+      <figure class="fig">
+        <figcaption><strong>Annual revenue, FY2008–FY2025</strong><span>US$ billions · 2025 is company guidance</span></figcaption>
+        <div class="chart" id="ch-rev" role="img" aria-label="Line chart of Adobe revenue rising from 3.58 billion dollars in 2008 to 21.51 billion in 2024, with 23.7 billion guided for 2025."></div>
+        <ol class="keyed">
+          <li><b>1</b>2009: global crisis, enterprise spending fell</li>
+          <li><b>2</b>2012–15: Creative Cloud transition flattened revenue</li>
+          <li><b>3</b>2018: Magento &amp; Marketo boost Experience Cloud</li>
+          <li><b>4</b>2022–23: Figma deal uncertainty and a $1B fee</li>
+          <li><b>5</b>2024: AI monetization fuels record growth</li>
+        </ol>
+        <details class="data"><summary>View data</summary><div class="tbl" data-table="rev"></div></details>
+      </figure>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Profitability:</span> <span class="g">Margins most software companies envy</span></h3>
+      <p class="note">Our conclusion on fiscal management: high LTV:CAC, strong profitability, efficient use of assets and steady EPS growth.</p>
+      <div class="tiles">
+        <div class="tile"><span class="big num">30.01<small>%</small></span><span class="k">Profit margin</span><span class="cite">Yahoo Finance</span></div>
+        <div class="tile"><span class="big num">36.29<small>%</small></span><span class="k">Operating margin</span><span class="cite">Yahoo Finance</span></div>
+        <div class="tile"><span class="big num">33.18<small>%</small></span><span class="k">Return on equity</span><span class="cite">Yahoo Finance</span></div>
+        <div class="tile"><span class="big num">18.09<small>%</small></span><span class="k">Return on assets</span><span class="cite">Yahoo Finance</span></div>
+        <div class="tile"><span class="big num">3:1</span><span class="k">LTV : CAC</span><span class="cite">Adobe, 2023</span></div>
+        <div class="tile"><span class="big num">$20.8<small>+</small></span><span class="k">EPS 2025 guidance</span><span class="d">$20.80–$20.85, up from $18.00 in 2024</span><span class="cite">Reuters, 2025</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="cols">
+        <figure class="fig">
+          <figcaption><strong>Where FY2024 revenue came from</strong><span>Share of total</span></figcaption>
+          <div id="ch-mix"></div>
+          <p class="cite" style="margin-top:10px">Bullfincher; Adobe 2024 annual report</p>
+        </figure>
+        <figure class="fig">
+          <figcaption><strong>Where FY2024 spending went</strong><span>Share of total costs</span></figcaption>
+          <div id="ch-cost"></div>
+          <p class="cite" style="margin-top:10px">Adobe Inc., 2024</p>
+        </figure>
+      </div>
+      <div class="cols" style="margin-top:28px">
+        <div class="panel"><h4 style="font-size:17px;font-weight:800;margin-bottom:6px">The $1B Figma termination fee</h4><p style="font-size:15px;color:var(--ink-2)">Adobe announced plans to acquire Figma in September 2022. A year later the deal was called off after U.S. and European antitrust regulators objected. The fee dented profit for a year and left cash flow intact.</p></div>
+        <div class="panel"><h4 style="font-size:17px;font-weight:800;margin-bottom:6px">R&amp;D grew 13.56% over 2023</h4><p style="font-size:15px;color:var(--ink-2)">Margins held even with heavy R&amp;D and marketing spend. Growth has moved from acquisitions (Magento and Marketo added hundreds of millions in recurring revenue) to organic AI products like Firefly.</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Balance sheet:</span> <span class="g">Expanding assets, disciplined liabilities</span></h3>
+      <p class="note">Total assets grew 24% from 2020 to 2024 while revenue grew 67%. Adobe is producing more with roughly the same base.</p>
+      <div class="cols" style="align-items:start">
+        <figure class="fig">
+          <figcaption><strong>Balance sheet composition, 2020–2024</strong><span>US$ millions</span></figcaption>
+          <ul class="legend"><li><i style="background:var(--red)"></i>Total assets</li><li><i style="background:var(--c2)"></i>Total liabilities</li><li><i style="background:var(--c3)"></i>Shareholders’ equity</li></ul>
+          <div class="chart" id="ch-bs" role="img" aria-label="Grouped bar chart of Adobe total assets, liabilities and equity from 2020 to 2024."></div>
+          <details class="data"><summary>View data</summary><div class="tbl" data-table="bs"></div></details>
+        </figure>
+        <ul class="story">
+          <li style="--dot:var(--c3)"><div><h4>Falling equity is a choice</h4><p>Adobe reduced equity through buybacks, trading short-term balance sheet strength for more value per share. Consistent profits and cash flow make that sustainable.</p></div></li>
+          <li style="--dot:var(--c2)"><div><h4>Higher liabilities fund innovation</h4><p>In 2024, liabilities rose mainly from new loans and short-term debt nearing maturity. That kept more cash free for AI development and Creative Cloud upgrades.</p></div></li>
+          <li style="--dot:var(--red)"><div><h4>Flat assets, rising revenue</h4><p>Assets barely moved in 2021–22 and again in 2023–24 while revenue kept climbing. Growth no longer needs more capital.</p></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Strengths and drags:</span> <span class="g">What drives it and what holds it back</span></h3>
+      <p class="note">A powerhouse subscription business carries a few small weights.</p>
+      <div class="cards">
+        <div class="card"><span class="stat num">~74%</span><h4>Digital Media dominance</h4><p>$15.86B in 2024 at 95.7% gross margin, $17.2B ARR, and 28M+ Creative Cloud subscribers.</p></div>
+        <div class="card neutral"><span class="stat num" style="color:var(--ink-2)">&lt;2%</span><h4>Publishing &amp; Advertising drag</h4><p>About $275M of revenue at a lower 67.6% margin, with little growth from legacy products.</p></div>
+        <div class="card neutral"><span class="stat num" style="color:var(--ink-2)">~45%</span><h4>Intangible assets risk</h4><p>Goodwill and intangibles make up nearly half of total assets. They reflect acquisition premiums and generate no direct cash.</p></div>
+      </div>
+      <div class="tiles" style="margin-top:14px">
+        <div class="tile"><span class="big num">9.88</span><span class="k">Altman Z-score</span><span class="d">Far above the 3.0 safe-zone line</span></div>
+        <div class="tile"><span class="big num">39.2<small>×</small></span><span class="k">Interest coverage</span><span class="d">Debt is easy to service</span></div>
+        <div class="tile"><span class="big num">0.3</span><span class="k">Debt-to-revenue</span><span class="d">Room to borrow if needed</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Market position:</span> <span class="g">Still the default for professionals</span></h3>
+      <div class="cols" style="margin-top:20px">
+        <figure class="fig">
+          <figcaption><strong>Creative &amp; design tools market share, 2024–25</strong><span>Estimated</span></figcaption>
+          <div id="ch-share"></div>
+          <p class="cite" style="margin-top:10px">Compiled from public reports; some values are estimates</p>
+        </figure>
+        <figure class="fig">
+          <figcaption><strong>Largest institutional holders</strong><span>Share of stock</span></figcaption>
+          <div id="ch-inv"></div>
+          <p class="cite" style="margin-top:10px">Business Quant, n.d.</p>
+        </figure>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="verdict"><strong>Diagnosis:</strong> Adobe’s financial fortress is built on its Digital Media subscription engine. It has the margins, cash and balance sheet to make a big move. So why did the stock fall about 40% from its late-2024 peak? We looked at the stock next.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STOCK ================= -->
+<section id="stock">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>2</b>Value · Stock analysis</p>
+      <h2><span class="r">Market wake-up call:</span><span class="g">Strong fundamentals, falling price</span></h2>
+      <p class="lede">Earnings kept rising while the share price slid for a year. That gap is the most important clue in the case: investors weren’t doubting Adobe’s profits. They were doubting its future.</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile"><span class="big num">≈$325</span><span class="k">Share price, Dec 2025</span><span class="d">Approximate, from our price chart</span></div>
+      <div class="tile"><span class="big num">≈−40<small>%</small></span><span class="k">From the late-2024 peak</span><span class="d">Down from about $550</span></div>
+      <div class="tile"><span class="big num">~15<small>×</small></span><span class="k">Forward P/E</span><span class="d">PEG ratio under 1.0</span></div>
+      <div class="tile"><span class="big num">+15.6<small>%</small></span><span class="k">EPS growth, 2024→2025</span><span class="d">$18.00 to $20.80–$20.85</span></div>
+      <div class="tile"><span class="big num">28</span><span class="k">Analysts covering</span><span class="d">Consensus: Moderate Buy</span></div>
+    </div>
+
+    <div class="block" style="margin-top:72px">
+      <h3><span class="r">Price action:</span> <span class="g">Four sell-offs, four different fears</span></h3>
+      <p class="note">Each drop came with its own story. Read together, they show the market’s concern moving from AI monetization to competition and then to pricing.</p>
+      <figure class="fig">
+        <figcaption><strong>ADBE share price and 12-month analyst targets</strong><span>US$ · approximate monthly prices</span></figcaption>
+        <ul class="legend"><li><i style="background:var(--red)"></i>Share price</li><li><i class="dash" style="color:var(--good)"></i>High target</li><li><i class="dash" style="color:var(--ink-2)"></i>Average target</li><li><i class="dash" style="color:var(--ink-3)"></i>Low target</li></ul>
+        <div class="chart" id="ch-stock" role="img" aria-label="ADBE share price falling from about 445 dollars in December 2024 to about 325 in December 2025, with drops of 14, 11, 6 and 4.5 percent, and analyst targets for December 2026 of 280 low, 456.52 average and 600 high."></div>
+        <details class="data"><summary>View data</summary><div class="tbl" data-table="stock"></div></details>
+      </figure>
+      <ol class="selloffs">
+        <li><span class="when">Dec ’24</span><span class="drop num">−14.0%</span><h4>Cool tech, but no profit</h4><p>AI features shipped faster than AI revenue. Investors wanted proof that Firefly pays for itself.</p></li>
+        <li><span class="when">Mar ’25</span><span class="drop num">−11.0%</span><h4>Competitive panic</h4><p>Canva, Figma and AI-native tools all launched features aimed directly at Adobe users.</p></li>
+        <li><span class="when">Jun ’25</span><span class="drop num">−6.0%</span><h4>Fewer subscriptions</h4><p>Concern that new subscriber growth was slowing, especially among individual creators.</p></li>
+        <li><span class="when">Sep ’25</span><span class="drop num">−4.5%</span><h4>Cheaper alternatives</h4><p>Free and low-cost tools kept pressure on Adobe’s premium pricing.</p></li>
+      </ol>
+      <p class="note" style="margin-top:20px">Each sell-off was smaller than the last. The market was adjusting its expectations, not panicking, and the fears it named line up with the market forces in the next chapter.</p>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Analyst targets:</span> <span class="g">Most of the range sits above today’s price</span></h3>
+      <p class="note">Four of the five reference points sit above the current price. Only the most bearish analyst sees further downside.</p>
+      <figure class="fig">
+        <figcaption><strong>Where the price stands against targets and intrinsic value</strong><span>US$ per share</span></figcaption>
+        <div class="chart" id="ch-range" role="img" aria-label="Number line from 250 to 650 dollars: low target 280, current price about 325, median 450, average 456.52, intrinsic value estimate 583, high target 600."></div>
+      </figure>
+      <div class="tbl" style="margin-top:24px">
+        <table>
+          <thead><tr><th>Dec 2026 target</th><th>Low</th><th>Average</th><th>Median</th><th>High</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>$280</td><td>$456.52</td><td>$450</td><td>$600</td></tr>
+            <tr><td>Change</td><td>−13.86%</td><td>+40.45%</td><td>+38.44%</td><td>+84.59%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cite" style="margin-top:8px">Source: Stock Analysis. Intrinsic value from Buffett-style models cited in our financial analysis.</p>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Bull vs. bear:</span> <span class="g">Why we still rate Adobe an attractive investment</span></h3>
+      <p class="note">We weighed what the price ignores against what it is worried about.</p>
+      <div class="bb">
+        <div class="bb-col bull">
+          <p class="bb-h">Bull case</p>
+          <div class="card"><h4>Strong growth &amp; profitability</h4><p>11%+ revenue growth in 2025, with a 31% net profit margin and an 89% gross margin.</p></div>
+          <div class="card"><h4>AI integration leadership</h4><p>Firefly and Acrobat AI Assistant are driving ARR growth in both digital media and customer experience.</p></div>
+          <div class="card"><h4>Competitive moat</h4><p>$18.6B Digital Media ARR, 74% of revenue. The product ecosystem and high switching costs keep customers loyal.</p></div>
+        </div>
+        <div class="bb-col bear">
+          <p class="bb-h">Bear case</p>
+          <div class="card neutral"><h4>Losing the next generation</h4><p>Only 14% of student and Gen Z creative tool use happens in Creative Cloud. Canva has 81.2%.</p></div>
+          <div class="card neutral"><h4>Pricing pressure</h4><p>Free and cheap AI-native tools make a premium subscription harder to justify for new users.</p></div>
+          <div class="card neutral"><h4>Regulatory and balance sheet weight</h4><p>Three AI regulation cases, plus goodwill and intangibles at about 45% of total assets.</p></div>
+        </div>
+      </div>
+      <div class="cols" style="margin-top:28px">
+        <div class="panel"><h4 style="font-size:17px;font-weight:800;margin-bottom:6px">Valuation appeal</h4><p style="font-size:15px;color:var(--ink-2)">About 15× forward earnings with a PEG under 1.0. Buffett-style intrinsic value models put fair value above $583 a share, and 28 Wall Street analysts hold a Moderate Buy consensus with roughly 37% upside.</p></div>
+        <div class="panel"><h4 style="font-size:17px;font-weight:800;margin-bottom:6px">Key investment criteria</h4><p style="font-size:15px;color:var(--ink-2)">Today’s market rewards sustainable growth, strong free cash flow, AI-driven innovation and durable competitive advantages. Adobe meets all four on current numbers.</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="verdict"><strong>Investment thesis:</strong> Adobe combines financial strength, innovation leadership and an attractive valuation, which makes it a high-quality long-term holding. The discount exists because the market doubts Adobe’s reach with the next generation. Our strategy is built to close that gap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEFINE ================= -->
+<section id="define">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>3</b>Define · Market diagnosis</p>
+      <h2><span class="r">Strength without reach:</span><span class="g">Leadership holds, relevance fades</span></h2>
+      <p class="lede">Five forces changed Adobe’s market at the same time. Each one is manageable alone. Together they explain the gap between Adobe’s fundamentals and its share price.</p>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Tech &amp; creativity collide:</span> <span class="g">Creativity hits a global turning point</span></h3>
+      <p class="note">The same illustration in three eras. What took a skilled hand in the 1990s, and pro software in the 2000s, now takes a prompt.</p>
+      <div class="eras-fig">
+        <figure><img src="assets/era-1990s.jpg" alt="Black and white bitmap illustration in an early Mac paint program" loading="lazy"><span class="when">1990s</span><p>MacPaint, PC Paintbrush, SuperPaint, Dazzle Draw, Quantel Paintbox</p></figure>
+        <figure><img src="assets/era-2000s.jpg" alt="The same illustration painted in full color in Photoshop CS" loading="lazy"><span class="when">2000–2010</span><p>Photoshop, Painter, Krita, Autodesk</p></figure>
+        <figure><img src="assets/era-2025.jpg" alt="The same illustration rendered in 3D inside a dark AI generation interface" loading="lazy"><span class="when">2025</span><p>Firefly, Canva, Figma, DALL·E 3, Midjourney, Gemini, NightCafe</p></figure>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">The GenAI boom:</span> <span class="g">Creativity at superhuman speed</span></h3>
+      <p class="note">Google, Microsoft, Meta and Apple are all racing to own the best AI platform. Adobe is running the same race, and spending to stay in it.</p>
+      <div class="tiles">
+        <div class="tile"><span class="big num">10→25<small>%</small></span><span class="k">R&amp;D share, 2020 to 2025</span><span class="d">A 150% increase in R&amp;D intensity</span></div>
+        <div class="tile"><span class="big num">+100</span><span class="k">New AI features</span><span class="d">Shipped across Photoshop, Illustrator, Premiere Pro, Acrobat and more</span></div>
+        <div class="tile"><span class="big num">$1B<small>/yr</small></span><span class="k">AI investment</span><span class="d">Annual spend on generative AI</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">New AI laws incoming:</span> <span class="g">Compliance becomes competitive armor</span></h3>
+      <p class="note">Regulators are writing rules faster than products ship. A company that can prove where its training data came from has an edge.</p>
+      <div class="cols" style="align-items:start">
+        <div class="tiles" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="tile"><span class="big num">3</span><span class="k">AI regulation cases on Adobe</span></div>
+          <div class="tile"><span class="big num">$595M</span><span class="k">Fines paid by companies on AI regulation</span></div>
+          <div class="tile"><span class="big num">259</span><span class="k">New AI regulation laws worldwide</span></div>
+          <div class="tile"><span class="big num">118</span><span class="k">New AI regulation laws in the USA</span></div>
+          <div class="tile" style="grid-column:1/-1"><span class="big num">€35M</span><span class="k">Biggest single AI regulation fine, 2025</span></div>
+        </div>
+        <div class="press">
+          <blockquote><p>Adobe Says It Won’t Train AI Using Artists’ Work. Creatives Aren’t Convinced</p><footer>WIRED, Tiffany Ng, June 19, 2024</footer></blockquote>
+          <blockquote><p>EU tightens grip on Big Tech with sweeping digital regulations</p><footer>ICLG, Rob Harkavy, July 16, 2024</footer></blockquote>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">The new creative rivals:</span> <span class="g">Fast, cheap and Gen Z approved</span></h3>
+      <p class="note">Canva and Figma win the generations that will be tomorrow’s professionals. Adobe’s audience skews younger than its reputation, but it is the smallest of the three.</p>
+      <div class="cols" style="align-items:start">
+        <figure class="fig">
+          <figcaption><strong>Preference by generation</strong><span>Index as reported in our research deck</span></figcaption>
+          <ul class="legend"><li><i style="background:var(--c2)"></i>Millennials</li><li><i style="background:var(--red)"></i>Gen Z</li><li><i style="background:var(--c3)"></i>Gen Alpha</li></ul>
+          <div class="chart" id="ch-gen" role="img" aria-label="Stacked bars: Canva 20.5, Figma 13, Adobe 10, split by Millennials, Gen Z and Gen Alpha."></div>
+          <details class="data"><summary>View data</summary><div class="tbl" data-table="gen"></div></details>
+        </figure>
+        <div class="press">
+          <blockquote><p>Figma’s big AI update takes on Adobe, WordPress, and Canva</p><footer>The Verge, Jess Weatherbed, May 7, 2025</footer></blockquote>
+          <blockquote><p>Canva Goes After Adobe Users With Work Tools to Speed Up Growth</p><footer>Bloomberg, Olivia Poh, May 23, 2024</footer></blockquote>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="pull">
+        <figure class="fig">
+          <figcaption><strong>Creative tool usage among students &amp; Gen Z</strong><span>2024–2025</span></figcaption>
+          <div id="ch-genz"></div>
+        </figure>
+        <q>Where the next generation creates, and it’s not Adobe first.</q>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Inside Adobe:</span> <span class="g">Strong foundation, slowing agility</span></h3>
+      <p class="note">Every strength we found in the financials has a matching weakness in the product.</p>
+      <div class="tension">
+        <div class="side">
+          <div class="bubble"><h4>Enterprise power, Gen Z gap</h4><p>Adobe dominates enterprise, but younger creators choose simpler tools.</p></div>
+          <div class="bubble"><h4>Pricing up, clarity down</h4><p>A high-margin subscription model with confusing tiers for new users.</p></div>
+        </div>
+        <img src="assets/inside-adobe.jpg" alt="Sketch of a worried team huddled around computer screens with question marks above them" loading="lazy">
+        <div class="side">
+          <div class="bubble"><h4>Strong brand, heavy product</h4><p>Trust is high, but the tools feel bloated next to AI-native rivals.</p></div>
+          <div class="bubble"><h4>Reliable revenue, slower innovation</h4><p>A stable business whose agility is fading.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Stable but stalled:</span> <span class="g">The market doubles, Adobe’s friction stays</span></h3>
+      <p class="note">Digital content creation will more than double by 2030. The growth is there for whoever makes it easiest to start.</p>
+      <div class="cols" style="align-items:center">
+        <figure class="fig">
+          <figcaption><strong>Digital content creation market, 2018–2030</strong><span>US$ billions · 2026 onward is forecast</span></figcaption>
+          <div class="chart" id="ch-mkt" role="img" aria-label="Bar chart of the digital content creation market growing from about 19.5 billion dollars in 2018 to 32.3 billion in 2024, 36.4 billion in 2025, and 69.8 billion forecast in 2030."></div>
+          <details class="data"><summary>View data</summary><div class="tbl" data-table="mkt"></div></details>
+        </figure>
+        <div>
+          <p style="font-weight:700;color:var(--ink-2);font-size:19px;margin-bottom:14px">But Adobe is still struggling with:</p>
+          <div class="cards" style="grid-template-columns:1fr">
+            <div class="card neutral"><h4>Subscription price sentiment</h4><p>Users feel they pay a lot for tools they only partly use.</p></div>
+            <div class="card neutral"><h4>A complex customer journey</h4><p>Too many apps, plans and tiers to choose between.</p></div>
+            <div class="card neutral"><h4>Onboarding friction</h4><p>The first hour in Adobe is harder than the first hour in Canva.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="problem">
+        <p class="kicker">Problem statement</p>
+        <p class="big">Adobe owns the professional creative market but is losing first contact with the next generation to faster, cheaper, AI-native tools, <em>in a market set to double by 2030.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DECIDE ================= -->
+<section id="decide">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>4</b>Decide · Strategic alternatives</p>
+      <h2><span class="r">Three bets:</span><span class="g">Rebuild, open up, or monetize the community</span></h2>
+      <p class="lede">We tested each alternative against the problem: does it reach new creators, how fast, and what does it put at risk?</p>
+    </div>
+
+    <div class="alts">
+      <article class="alt">
+        <span class="no">Alternative 1</span>
+        <h4>The AI-native creative environment</h4>
+        <p class="sl">From a collection of apps to the OS of global creativity</p>
+        <dl>
+          <div><dt>The idea</dt><dd>Replace a suite of separate apps with one AI-first workspace where every tool and model is a step away.</dd></div>
+          <div><dt>Solves</dt><dd>“Heavy product” and the complex customer journey.</dd></div>
+          <div><dt>Risk</dt><dd>A multi-year rebuild. It does little for Gen Z reach in the next 12 months.</dd></div>
+        </dl>
+        <span class="fate go"><i></i>Became the 3–5 year vision</span>
+      </article>
+      <article class="alt">
+        <span class="no">Alternative 2</span>
+        <h4>Creative Cloud Free</h4>
+        <p class="sl">Invite the world into Adobe</p>
+        <dl>
+          <div><dt>The idea</dt><dd>A free entry point to Creative Cloud so the first design a student makes is made in Adobe.</dd></div>
+          <div><dt>Solves</dt><dd>The Gen Z gap, price sentiment and onboarding friction.</dd></div>
+          <div><dt>Risk</dt><dd>Free can cannibalize paid plans unless the upgrade path is designed in.</dd></div>
+        </dl>
+        <span class="fate go"><i></i>Refined into the 12-month priority</span>
+      </article>
+      <article class="alt">
+        <span class="no">Alternative 3</span>
+        <h4>Firefly Marketplace</h4>
+        <p class="sl">A new creative economy</p>
+        <dl>
+          <div><dt>The idea</dt><dd>A marketplace where creators sell assets, styles and templates made with commercially safe Firefly models.</dd></div>
+          <div><dt>Solves</dt><dd>Creator trust and a new revenue stream on top of subscriptions.</dd></div>
+          <div><dt>Risk</dt><dd>A marketplace needs a large creator base first, and adds licensing exposure.</dd></div>
+        </dl>
+        <span class="fate"><i></i>Held until reach is rebuilt</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DELIVER ================= -->
+<section id="deliver">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>5</b>Deliver · Recommendation</p>
+      <h2><span class="r">Empower every creator, everywhere:</span><span class="g">Adobe’s path to creative AI leadership</span></h2>
+      <p class="lede"><strong style="color:var(--ink)">Vision:</strong> become the world’s most trusted and accessible creative AI platform within 3–5 years. The roadmap has three tiers, each unlocking the next.</p>
+    </div>
+
+    <div class="road">
+      <div class="stage">
+        <span class="dot"></span>
+        <span class="when">Immediate · 60–90 day cycles</span>
+        <h4>Immediate action</h4>
+        <p class="what"><b>Adobe Agile Studio:</b> a cross-functional taskforce built to ship fast.</p>
+        <ul><li>Rapid prototyping and market testing</li><li>Mobile-first workflow development</li><li>Content Credentials on by default</li></ul>
+      </div>
+      <div class="stage">
+        <span class="dot"></span>
+        <span class="when">Next 12 months</span>
+        <h4>12-month priority</h4>
+        <p class="what"><b>Simplified mobile tier:</b> freemium acquisition for mobile-first creators.</p>
+        <ul><li>Express, Lightroom Mobile and Firefly tools</li><li>Canva-level ease with Adobe power</li><li>AI-powered quick actions built in</li></ul>
+      </div>
+      <div class="stage">
+        <span class="dot"></span>
+        <span class="when">3–5 years</span>
+        <h4>3–5 year vision</h4>
+        <p class="what"><b>Trusted AI leader:</b> ethical standards through independent governance.</p>
+        <ul><li>Creative Cloud and Experience Cloud unified</li><li>AI-native workflows across all devices</li><li>Global accessibility at every level</li></ul>
+      </div>
+    </div>
+
+    <div class="block" style="margin-top:88px">
+      <div class="spot">
+        <div>
+          <p class="kicker" style="margin-bottom:12px">The single most important action</p>
+          <h3><span class="r">Next 12 months:</span> <span class="g">Release a simplified, low-cost tier built for mobile and AI-first creation</span></h3>
+          <div class="opps">
+            <div class="opp">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="var(--red)"/><rect x="14" y="10" width="12" height="20" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/><line x1="18" y1="26.5" x2="22" y2="26.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+              <div><h4>Mobile-first generation</h4><p>Capture younger creators before competitors do.</p></div>
+            </div>
+            <div class="opp">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="var(--red)"/><path d="M22 9 13 22h6l-1 9 9-13h-6z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+              <div><h4>AI feature velocity</h4><p>Ship Firefly innovations faster with agile cycles.</p></div>
+            </div>
+            <div class="opp">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="var(--red)"/><path d="M20 29V12M13 18l7-7 7 7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><h4>Upgrade economics</h4><p>A freemium entry that still leads to premium plans.</p></div>
+            </div>
+          </div>
+          <p class="csf"><strong>Critical success factor:</strong> user research and problem validation <em>before</em> development, so the tier solves real pain points instead of shipping features in search of problems.</p>
+        </div>
+        <img src="assets/mobile-creators.jpg" alt="Illustration of a group of young creators smiling at their phones" loading="lazy">
+      </div>
+    </div>
+
+    <div class="block">
+      <h3><span class="r">Forecast:</span> <span class="g">Driving growth through focused strategy</span></h3>
+      <p class="note">The path to mid-to-high single-digit ARR growth runs through three levers, one from each tier of the roadmap.</p>
+      <div class="levers">
+        <div class="lever"><span class="lv">Expansion</span><p>New creators enter through the free mobile tier and upgrade over time.</p><span class="via">via the simplified mobile tier</span></div>
+        <div class="lever"><span class="lv">Speed</span><p>60–90 day cycles put AI features in users’ hands before rivals copy them.</p><span class="via">via Adobe Agile Studio</span></div>
+        <div class="lever"><span class="lv">Trusted AI</span><p>Content Credentials and independent governance turn compliance into a reason to choose Adobe.</p><span class="via">via the trusted AI leader vision</span></div>
+      </div>
+      <div class="outcome"><strong>Mid-to-high single-digit ARR growth</strong><span>Built on expansion, speed and trusted AI, protecting Adobe’s strengths in brand trust, ecosystem depth and creative excellence.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="answer" aria-labelledby="answer-h">
+  <div class="wrap">
+    <p class="kicker">So, will Adobe lead or be left behind?</p>
+    <h2 id="answer-h">Lead, <span>if it moves first.</span></h2>
+    <p>Adobe has the money, the brand and the AI models. What it lacks is a simple front door for creators who start on a phone. Build that door this year and the next generation of professionals grows up inside Adobe again.</p>
+    <div class="three"><span>Faster</span><span>Simpler</span><span>Trusted</span></div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:28px">
+      <h2><span class="r">Sources</span></h2>
+    </div>
+    <div>
+      <ol class="refs">
+        <li>Adobe. (2023, July 24). <i>Understand and build basic analytics</i>. Adobe Experience League.</li>
+        <li>Adobe. (2025, February 3). <i>Technology stack: Adobe Commerce on cloud user guide</i>. Adobe Experience League.</li>
+        <li>Adobe. (2025, May 5). <i>Adobe Experience Cloud architecture diagrams</i>. Adobe Experience League.</li>
+        <li>Adobe. (n.d.). <i>Adobe cloud storage data centers</i>. Adobe Help Center.</li>
+        <li>Adobe Inc. (2024). <i>Adobe 2024 annual report</i>.</li>
+        <li>Bullfincher. (n.d.). <i>Adobe: revenue by segment</i>.</li>
+        <li>Business Quant. (n.d.). <i>Adobe Inc. (ADBE) institutional ownership</i>.</li>
+        <li>LGfL. (n.d.). <i>Adobe Creative Cloud</i>.</li>
+        <li>Reuters. (2025, September 11). <i>Adobe raises annual revenue and profit forecasts on strong design software demand</i>.</li>
+        <li>Yahoo Finance. (n.d.). <i>Adobe Inc. (ADBE): key statistics</i>.</li>
+        <li>Stock Analysis. (2025). <i>ADBE price target and analyst forecast</i>.</li>
+        <li>Ng, T. (2024, June 19). <i>Adobe says it won’t train AI using artists’ work. Creatives aren’t convinced</i>. WIRED.</li>
+        <li>Harkavy, R. (2024, July 16). <i>EU tightens grip on Big Tech with sweeping digital regulations</i>. ICLG.</li>
+        <li>Weatherbed, J. (2025, May 7). <i>Figma’s big AI update takes on Adobe, WordPress, and Canva</i>. The Verge.</li>
+        <li>Poh, O. (2024, May 23). <i>Canva goes after Adobe users with work tools to speed up growth</i>. Bloomberg.</li>
+        <li>Anthropic. (2025). <i>Claude (Sonnet 4.5)</i> [Large language model].</li>
+      </ol>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Adobenauts · 2025</span>
+    <span>An independent student case study. Not affiliated with or endorsed by Adobe Inc. Product names belong to their owners.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+const NS="http://www.w3.org/2000/svg";
+const tip=document.getElementById("tip");
+function el(tag,attrs,parent,text){const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(text!=null)n.textContent=text;if(parent)parent.appendChild(n);return n}
+function showTip(html,x,y){tip.innerHTML=html;tip.hidden=false;const w=tip.offsetWidth;const cx=Math.min(Math.max(x,w/2+8),innerWidth-w/2-8);tip.style.left=cx+"px";tip.style.top=Math.max(y,tip.offsetHeight+20)+"px"}
+function hideTip(){tip.hidden=true}
+function bindTip(node,html){node.style.cursor="default";node.addEventListener("pointerenter",e=>showTip(html,e.clientX,e.clientY));node.addEventListener("pointermove",e=>showTip(html,e.clientX,e.clientY));node.addEventListener("pointerleave",hideTip)}
+addEventListener("scroll",hideTip,{passive:true});
+const fmtB=v=>"$"+v.toFixed(2)+"B";
+const fmtM=v=>"$"+v.toLocaleString("en-US")+"M";
+
+/* ---------- data ---------- */
+const REV=[[2008,3.58],[2009,2.95],[2012,4.40],[2015,4.80],[2018,9.03],[2019,11.17],[2020,12.87],[2021,15.79],[2022,17.61],[2023,19.41],[2024,21.51],[2025,23.7]];
+const REV_NOTES={2009:1,2012:2,2018:3,2022:4,2024:5};
+const BS={years:[2020,2021,2022,2023,2024],series:[
+  {name:"Total assets",color:"var(--red)",v:[24284,27241,27165,29779,30230]},
+  {name:"Total liabilities",color:"var(--c2)",v:[11020,12444,13114,13261,16125]},
+  {name:"Shareholders’ equity",color:"var(--c3)",v:[13264,14797,14051,16518,14105]}]};
+const GEN={cats:["Canva","Figma","Adobe"],series:[
+  {name:"Millennials",color:"var(--c2)",v:[10,7,2]},
+  {name:"Gen Z",color:"var(--red)",v:[8.5,5,5]},
+  {name:"Gen Alpha",color:"var(--c3)",v:[2,1,3]}]};
+const MONTHS=["Dec ’24","Jan ’25","Feb ’25","Mar ’25","Apr ’25","May ’25","Jun ’25","Jul ’25","Aug ’25","Sep ’25","Oct ’25","Nov ’25","Dec ’25"];
+const PRICE=[445,437,438,383,375,415,387,357,356,353,340,320,325];
+const EVENTS=[[0,"−14.0%","Cool tech, but no profit"],[3,"−11.0%","Competitive panic"],[6,"−6.0%","Fewer subscriptions"],[9,"−4.5%","Cheaper alternatives"]];
+const TARGETS=[["High",600,"var(--good)"],["Average",456.52,"var(--ink-2)"],["Low",280,"var(--ink-3)"]];
+const MKT=[[2018,19.5],[2019,20.2],[2020,20.2],[2021,22.6],[2022,25.6],[2023,28.6],[2024,32.3],[2025,36.4],[2026,41.2],[2027,46.6],[2028,53.0],[2029,60.6],[2030,69.8]];
+const MKT_EXACT={2024:1,2025:1,2030:1};
+
+/* ---------- tables ---------- */
+const TABLES={
+  rev:{head:["Fiscal year","Revenue (US$B)"],rows:REV.map(([y,v])=>[y+(y===2025?" (guidance)":""),v.toFixed(2)])},
+  bs:{head:["Year",...BS.series.map(s=>s.name+" ($M)")],rows:BS.years.map((y,i)=>[y,...BS.series.map(s=>s.v[i].toLocaleString("en-US"))])},
+  gen:{head:["Tool",...GEN.series.map(s=>s.name),"Total"],rows:GEN.cats.map((c,i)=>[c,...GEN.series.map(s=>s.v[i]),GEN.series.reduce((a,s)=>a+s.v[i],0)])},
+  stock:{head:["Month","Approx. price (US$)"],rows:MONTHS.map((m,i)=>[m,PRICE[i]])},
+  mkt:{head:["Year","Market size (US$B)"],rows:MKT.map(([y,v])=>[y+(y>2025?" (forecast)":""),(MKT_EXACT[y]?"":"≈ ")+v.toFixed(1)])}
+};
+document.querySelectorAll("[data-table]").forEach(box=>{const t=TABLES[box.dataset.table];box.innerHTML="<table><thead><tr>"+t.head.map(h=>"<th>"+h+"</th>").join("")+"</tr></thead><tbody>"+t.rows.map(r=>"<tr>"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")+"</tbody></table>"});
+
+/* ---------- html bar charts ---------- */
+function hbars(id,items,max,fmt){
+  const box=document.getElementById(id);box.className="hb";
+  box.innerHTML=items.map(it=>`<div class="hb-row${it.ctx?" ctx":""}"><span class="l">${it.label}</span><div class="hb-track"><div class="hb-fill" style="width:${(it.value/max*100).toFixed(2)}%;background:${it.color}"></div></div><span class="v">${fmt(it.value)}</span></div>`).join("");
+}
+function stack(id,segs){
+  const box=document.getElementById(id);
+  const total=segs.reduce((a,s)=>a+s.value,0);
+  const bar=document.createElement("div");bar.className="stack";
+  segs.forEach(s=>{const d=document.createElement("div");d.style.flex=s.value+" 0 0";d.style.background=s.color;bindTip(d,`<b>${s.label}</b><br>${s.value}%`);bar.appendChild(d)});
+  const key=document.createElement("ul");key.className="stack-key";
+  key.innerHTML=segs.map(s=>`<li><i style="background:${s.color}"></i><span>${s.label}</span><b>${s.value}%</b></li>`).join("");
+  box.append(bar,key);
+}
+stack("ch-mix",[
+  {label:"Digital Media (Creative Cloud, Document Cloud)",value:73.7,color:"var(--red)"},
+  {label:"Digital Experience (marketing, analytics, commerce)",value:25.0,color:"var(--c2)"},
+  {label:"Publishing & Advertising",value:1.3,color:"var(--c3)"}]);
+hbars("ch-cost",[
+  {label:"Sales & marketing",value:39,color:"var(--red)"},
+  {label:"Research & development",value:26.7,color:"var(--red)"},
+  {label:"Cost of revenue",value:16,color:"var(--red)"},
+  {label:"General & admin",value:10.4,color:"var(--red)"},
+  {label:"Figma termination fee",value:6.8,color:"var(--red)"},
+  {label:"Other",value:1.1,color:"var(--red)",ctx:1}],40,v=>v+"%");
+hbars("ch-share",[
+  {label:"Adobe",value:58.2,color:"var(--red)"},
+  {label:"Canva",value:12.5,color:"var(--rival)",ctx:1},
+  {label:"Corel",value:11.4,color:"var(--rival)",ctx:1},
+  {label:"Others",value:8.0,color:"var(--rival)",ctx:1},
+  {label:"Affinity (Serif)",value:6.9,color:"var(--rival)",ctx:1},
+  {label:"Autodesk",value:3.0,color:"var(--rival)",ctx:1}],60,v=>v.toFixed(1)+"%");
+hbars("ch-inv",[
+  {label:"Vanguard",value:9.6,color:"var(--ink-2)"},
+  {label:"BlackRock",value:9.45,color:"var(--ink-2)"},
+  {label:"State Street",value:4.8,color:"var(--ink-2)"},
+  {label:"Geode Capital",value:2.6,color:"var(--ink-2)"},
+  {label:"UBS",value:2.05,color:"var(--ink-2)"}],10,v=>"~"+v+"%");
+hbars("ch-genz",[
+  {label:"Canva",value:81.2,color:"var(--rival)",ctx:1},
+  {label:"Adobe Creative Cloud",value:14,color:"var(--red)"},
+  {label:"Figma",value:4.8,color:"var(--rival)",ctx:1}],100,v=>v+"%");
+
+/* ---------- svg charts ---------- */
+function frame(box,h,m){
+  box.innerHTML="";const w=Math.max(280,box.clientWidth);
+  const s=el("svg",{width:w,height:h,viewBox:`0 0 ${w} ${h}`},box);
+  return {s,w,h,iw:w-m.l-m.r,ih:h-m.t-m.b,m};
+}
+function yGrid(f,ticks,y,fmt){
+  ticks.forEach(t=>{const yy=y(t);el("line",{x1:f.m.l,x2:f.w-f.m.r,y1:yy,y2:yy,class:"ax"},f.s);el("text",{x:f.m.l-8,y:yy+4,"text-anchor":"end"},f.s,fmt(t))});
+}
+function barPath(x,y,w,h,r){r=Math.min(r,w/2,h);if(h<=0)return"";return`M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`}
+
+function drawRev(box){
+  const f=frame(box,300,{l:44,r:20,t:30,b:30});const {s,m}=f;
+  const x=yr=>m.l+(yr-2008)/(2025-2008)*f.iw, y=v=>m.t+f.ih-(v/25)*f.ih;
+  yGrid(f,[0,5,10,15,20,25],y,t=>"$"+t+"B");
+  const xt=f.w<480?[2008,2012,2016,2020,2024]:[2008,2010,2012,2014,2016,2018,2020,2022,2024];
+  xt.forEach(t=>el("text",{x:x(t),y:f.h-8,"text-anchor":"middle"},s,t));
+  const hist=REV.slice(0,-1);
+  const pts=hist.map(([a,b])=>[x(a),y(b)]);
+  el("path",{d:"M"+pts.map(p=>p.join(",")).join("L")+`L${pts[pts.length-1][0]},${y(0)}L${pts[0][0]},${y(0)}Z`,fill:"var(--red)","fill-opacity":".08"},s);
+  el("path",{d:"M"+pts.map(p=>p.join(",")).join("L"),fill:"none",stroke:"var(--red)","stroke-width":2.5,"stroke-linejoin":"round"},s);
+  const last=REV[REV.length-1],prev=REV[REV.length-2];
+  el("path",{d:`M${x(prev[0])},${y(prev[1])}L${x(last[0])},${y(last[1])}`,stroke:"var(--red)","stroke-width":2.5,"stroke-dasharray":"5 4",fill:"none"},s);
+  REV.forEach(([a,b],i)=>{const isG=a===2025;el("circle",{cx:x(a),cy:y(b),r:4.5,fill:isG?"var(--bg)":"var(--red)",stroke:isG?"var(--red)":"var(--bg)","stroke-width":2},s);
+    if(REV_NOTES[a]){const cy=y(b)-20;el("circle",{cx:x(a),cy,r:9,fill:"var(--ink)"},s);el("text",{x:x(a),y:cy+4,"text-anchor":"middle",style:"fill:var(--bg);font-size:11px;font-weight:700"},s,REV_NOTES[a])}});
+  el("text",{x:x(2024),y:y(21.51)+20,"text-anchor":"end",class:"lbl"},s,"$21.5B");
+  el("text",{x:x(2008)+4,y:y(3.58)-14,class:"lbl"},s,"$3.6B");
+  const cross=el("line",{y1:m.t,y2:m.t+f.ih,stroke:"var(--ink-3)","stroke-dasharray":"2 3",visibility:"hidden"},s);
+  const hit=el("rect",{x:m.l,y:m.t,width:f.iw,height:f.ih,fill:"transparent"},s);
+  hit.addEventListener("pointermove",e=>{const r=s.getBoundingClientRect();const px=e.clientX-r.left;let best=REV[0];REV.forEach(d=>{if(Math.abs(x(d[0])-px)<Math.abs(x(best[0])-px))best=d});cross.setAttribute("x1",x(best[0]));cross.setAttribute("x2",x(best[0]));cross.setAttribute("visibility","visible");showTip(`<b>FY${best[0]}</b>${best[0]===2025?" · guidance":""}<br>${fmtB(best[1])}`,r.left+x(best[0]),r.top+y(best[1]))});
+  hit.addEventListener("pointerleave",()=>{cross.setAttribute("visibility","hidden");hideTip()});
+}
+
+function drawGrouped(box,data,{h=280,max,ticks,fmtAxis,fmtTip,labelLast}){
+  const f=frame(box,h,{l:52,r:8,t:22,b:28});const {s,m}=f;
+  const y=v=>m.t+f.ih-(v/max)*f.ih;
+  yGrid(f,ticks,y,fmtAxis);
+  const n=data.years.length,k=data.series.length,gw=f.iw/n,pad=gw*0.18,bw=(gw-2*pad-(k-1)*2)/k;
+  data.years.forEach((yr,i)=>{
+    el("text",{x:m.l+gw*i+gw/2,y:f.h-8,"text-anchor":"middle"},s,yr);
+    data.series.forEach((se,j)=>{const v=se.v[i],bx=m.l+gw*i+pad+j*(bw+2),by=y(v);
+      const p=el("path",{d:barPath(bx,by,bw,y(0)-by,3),fill:se.color},s);
+      const hit=el("rect",{x:bx-1,y:m.t,width:bw+2,height:f.ih,fill:"transparent"},s);bindTip(hit,`<b>${yr} · ${se.name}</b><br>${fmtTip(v)}`);
+      if(labelLast&&i===n-1&&bw>22)el("text",{x:bx+bw/2,y:by-6,"text-anchor":"middle",class:"lbl",style:"font-size:10.5px"},s,(v/1000).toFixed(1)+"k")});
+  });
+  el("line",{x1:m.l,x2:f.w-m.r,y1:y(0),y2:y(0),class:"base"},s);
+}
+
+function drawStacked(box){
+  const f=frame(box,270,{l:36,r:8,t:24,b:28});const {s,m}=f;
+  const max=25,y=v=>m.t+f.ih-(v/max)*f.ih;
+  yGrid(f,[0,5,10,15,20,25],y,t=>t);
+  const n=GEN.cats.length,gw=f.iw/n,bw=Math.min(96,gw*0.56);
+  GEN.cats.forEach((c,i)=>{let acc=0;const bx=m.l+gw*i+(gw-bw)/2;
+    el("text",{x:bx+bw/2,y:f.h-8,"text-anchor":"middle",class:c==="Adobe"?"lbl":""},s,c);
+    GEN.series.forEach((se,j)=>{const v=se.v[i];const top=y(acc+v),bot=y(acc);const isTop=j===GEN.series.length-1;
+      const hgt=bot-top-(j>0?2:0);
+      const p=isTop?el("path",{d:barPath(bx,top,bw,hgt,4),fill:se.color},s):el("rect",{x:bx,y:top,width:bw,height:Math.max(0,hgt),fill:se.color},s);
+      bindTip(p,`<b>${c} · ${se.name}</b><br>${v}`);acc+=v});
+    el("text",{x:bx+bw/2,y:y(acc)-8,"text-anchor":"middle",class:"lbl"},s,acc);
+  });
+  el("line",{x1:m.l,x2:f.w-m.r,y1:y(0),y2:y(0),class:"base"},s);
+}
+
+function drawStock(box){
+  const narrow=box.clientWidth<560;
+  const f=frame(box,340,{l:46,r:narrow?62:96,t:44,b:30});const {s,m}=f;
+  const X=i=>m.l+(i/24)*f.iw, lo=250,hi=620, y=v=>m.t+f.ih-((v-lo)/(hi-lo))*f.ih;
+  yGrid(f,[250,300,350,400,450,500,550,600],y,t=>"$"+t);
+  [[0,"Dec ’24"],[6,"Jun ’25"],[12,"Dec ’25"],[18,"Jun ’26"],[24,"Dec ’26"]].forEach(([i,t])=>el("text",{x:X(i),y:f.h-8,"text-anchor":"middle"},s,t));
+  el("rect",{x:X(12),y:m.t,width:X(24)-X(12),height:f.ih,fill:"var(--panel)"},s);
+  el("text",{x:X(12)+8,y:m.t+16,style:"font-size:11px;fill:var(--ink-3)"},s,"12-month forecast");
+  TARGETS.forEach(([n,v,c])=>{el("path",{d:`M${X(12)},${y(325)}L${X(24)},${y(v)}`,stroke:c,"stroke-width":2,"stroke-dasharray":"5 4",fill:"none"},s);
+    el("text",{x:X(24)+8,y:y(v)+4,class:"lbl",style:"font-size:11.5px"},s,`${n} $${v%1?v.toFixed(2):v}`)});
+  const pts=PRICE.map((v,i)=>[X(i),y(v)]);
+  el("path",{d:"M"+pts.map(p=>p.join(",")).join("L"),fill:"none",stroke:"var(--red)","stroke-width":2.5,"stroke-linejoin":"round"},s);
+  EVENTS.forEach(([i,pct,why],k)=>{const px=X(i),py=y(PRICE[i]);
+    el("line",{x1:px,x2:px,y1:m.t-6,y2:py-8,stroke:"var(--red)","stroke-width":1,"stroke-dasharray":"2 3"},s);
+    el("text",{x:px,y:m.t-12,"text-anchor":k===0?"start":"middle",class:"lbl",style:"fill:var(--red-ink);font-size:12px"},s,pct);
+    if(!narrow)el("text",{x:px,y:m.t-28,"text-anchor":k===0?"start":"middle",style:"font-size:11px"},s,why);
+    const c=el("circle",{cx:px,cy:py,r:5,fill:"var(--red)",stroke:"var(--bg)","stroke-width":2},s);
+    const hit=el("circle",{cx:px,cy:py,r:14,fill:"transparent"},s);bindTip(hit,`<b>${MONTHS[i]} · ${pct}</b><br>${why}`)});
+  el("circle",{cx:X(12),cy:y(325),r:5,fill:"var(--red)",stroke:"var(--bg)","stroke-width":2},s);
+  const cross=el("line",{y1:m.t,y2:m.t+f.ih,stroke:"var(--ink-3)","stroke-dasharray":"2 3",visibility:"hidden"},s);
+  const hit=el("rect",{x:m.l,y:m.t,width:X(12)-m.l+6,height:f.ih,fill:"transparent"},s);
+  s.insertBefore(hit,s.querySelector("circle"));
+  hit.addEventListener("pointermove",e=>{const r=s.getBoundingClientRect();const i=Math.max(0,Math.min(12,Math.round((e.clientX-r.left-m.l)/f.iw*24)));cross.setAttribute("x1",X(i));cross.setAttribute("x2",X(i));cross.setAttribute("visibility","visible");showTip(`<b>${MONTHS[i]}</b><br>≈ $${PRICE[i]}`,r.left+X(i),r.top+y(PRICE[i]))});
+  hit.addEventListener("pointerleave",()=>{cross.setAttribute("visibility","hidden");hideTip()});
+}
+
+function drawMarket(box){
+  const f=frame(box,280,{l:40,r:6,t:26,b:28});const {s,m}=f;
+  const y=v=>m.t+f.ih-(v/80)*f.ih;
+  yGrid(f,[0,20,40,60,80],y,t=>"$"+t);
+  const n=MKT.length,gw=f.iw/n,bw=Math.max(6,gw-Math.max(3,gw*0.28));
+  MKT.forEach(([yr,v],i)=>{const bx=m.l+gw*i+(gw-bw)/2,by=y(v),fc=yr>2025;
+    const p=el("path",{d:barPath(bx,by,bw,y(0)-by,3),fill:fc?"var(--ink-3)":"var(--ink)","fill-opacity":fc?".55":"1"},s);
+    bindTip(p,`<b>${yr}${fc?" · forecast":""}</b><br>${MKT_EXACT[yr]?"":"≈ "}$${v.toFixed(1)}B`);
+    if(MKT_EXACT[yr])el("text",{x:bx+bw/2,y:by-7,"text-anchor":"middle",class:"lbl",style:"font-size:11.5px"},s,"$"+v);
+    if(i%(f.w<480?3:2)===0||yr===2030)el("text",{x:bx+bw/2,y:f.h-8,"text-anchor":"middle"},s,yr)});
+  el("line",{x1:m.l,x2:f.w-m.r,y1:y(0),y2:y(0),class:"base"},s);
+}
+
+function drawRange(box){
+  const f=frame(box,150,{l:14,r:14,t:56,b:56});const {s,m}=f;
+  const lo=250,hi=650,x=v=>m.l+(v-lo)/(hi-lo)*f.iw,cy=m.t+(f.ih)/2;
+  const narrow=f.w<520;
+  el("rect",{x:x(280),y:cy-5,width:x(600)-x(280),height:10,rx:5,fill:"var(--tint)"},s);
+  el("line",{x1:m.l,x2:f.w-m.r,y1:cy,y2:cy,class:"base"},s);
+  const P=[["Low target",280,"down","var(--ink-3)"],["Now ≈",325,"up","var(--red)"],["Median",450,"down","var(--ink-2)"],["Average",456.52,"up","var(--ink-2)"],["Intrinsic value",583,"down","var(--ink)"],["High target",600,"up","var(--good)"]];
+  P.forEach(([n,v,side,c])=>{const px=x(v),up=side==="up";
+    el("line",{x1:px,x2:px,y1:up?cy-28:cy+6,y2:up?cy-6:cy+28,stroke:"var(--ink-3)","stroke-width":1},s);
+    const isNow=v===325;
+    el("circle",{cx:px,cy,r:isNow?7:5,fill:c,stroke:"var(--bg)","stroke-width":2},s);
+    const anchor=px<60?"start":(px>f.w-60?"end":"middle");
+    const val="$"+(v%1?v.toFixed(2):v);
+    if(narrow){el("text",{x:px,y:up?cy-34:cy+40,"text-anchor":anchor,class:"lbl",style:"font-size:11px"},s,(isNow?"Now ":"")+val)}
+    else{el("text",{x:px,y:up?cy-48:cy+30+14,"text-anchor":anchor,style:"font-size:11px;fill:var(--ink-2)"},s,isNow?"Current price":n);
+      el("text",{x:px,y:up?cy-34:cy+30+28,"text-anchor":anchor,class:"lbl",style:"font-size:12.5px"+(isNow?";fill:var(--red-ink)":"")},s,(isNow?"≈ ":"")+val)}
+    const hit=el("circle",{cx:px,cy,r:14,fill:"transparent"},s);
+    const ch=((v/325-1)*100);bindTip(hit,`<b>${isNow?"Current price":n}</b><br>${(isNow?"≈ ":"")+val}${isNow?"":` · ${ch>0?"+":""}${ch.toFixed(1)}% vs now`}`)});
+}
+
+const charts=[
+  ["ch-rev",drawRev],
+  ["ch-bs",b=>drawGrouped(b,BS,{max:35000,ticks:[0,10000,20000,30000],fmtAxis:t=>t?(t/1000)+"k":"0",fmtTip:fmtM,labelLast:true})],
+  ["ch-gen",drawStacked],
+  ["ch-stock",drawStock],
+  ["ch-range",drawRange],
+  ["ch-mkt",drawMarket]];
+charts.forEach(([id,fn])=>{const box=document.getElementById(id);let lastW=0;
+  const run=()=>{const w=box.clientWidth;if(w&&w!==lastW){lastW=w;fn(box)}};run();
+  if("ResizeObserver" in window)new ResizeObserver(()=>requestAnimationFrame(run)).observe(box)});
+
+/* ---------- nav state ---------- */
+const links=[...document.querySelectorAll(".toc a")];const prog=document.getElementById("progress");
+const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+function onScroll(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);prog.style.width=(p*100).toFixed(2)+"%";
+  let cur=-1;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<innerHeight*0.35)cur=i});
+  links.forEach((a,i)=>a.classList.toggle("on",i===cur))}
+addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
